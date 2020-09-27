@@ -9,8 +9,8 @@ WORKDIR /root
 RUN mkdir ${HOME}/toolkit && \
     mkdir /work && \
     mkdir ${HOME}/wordlists && \
-    mkdir -p ${HOME}/scripts/Enumeration && \ 
-    mkdir ${HOME}/scripts/PrivEsc  
+    mkdir -p ${HOME}/scripts/Enumeration && \
+    mkdir ${HOME}/scripts/PrivEsc
 
 
 # Install Essentials
@@ -30,7 +30,7 @@ RUN apt-get update && \
     nmap \
     whois \
     python2 \
-    python3-venv \    
+    python3-venv \
     python3 \
     python3-pip \
     perl \
@@ -39,7 +39,7 @@ RUN apt-get update && \
     net-tools \
     neovim\
     zsh\
-    libzip-dev \ 
+    libzip-dev \
     nodejs \
     npm \
     pkg-config \
@@ -47,7 +47,7 @@ RUN apt-get update && \
     rlwrap \
     && rm -rf /var/lib/apt/lists/*
 
-#Install Dependencies 
+#Install Dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     # sqlmap
@@ -57,25 +57,26 @@ RUN apt-get update && \
     # dnsenum
     cpanminus \
     #Metasploit
-    metasploit-framework \ 
+    metasploit-framework \
     # dnsrecon
     dnsrecon \
     #crackmapexe
+    ruby-dev \
     libssl-dev \
     libffi-dev\
-    python-dev \ 
+    python-dev \
     build-essential \
     #netcat
     netcat \
-    #enum4linux 
+    #enum4linux
     enum4linux \
     #dnsenum
     dnsenum \
     #hashcat
     hashcat \
     hash-identifier \
-    #tcpdump 
-    tcpdump \ 
+    #tcpdump
+    tcpdump \
     && rm -rf /var/lib/apt/lists/*
 
 
@@ -88,17 +89,17 @@ RUN cd /opt && \
     wget https://dl.google.com/go/go1.13.3.linux-amd64.tar.gz && \
     tar -xvf go1.13.3.linux-amd64.tar.gz && \
     rm -rf /opt/go1.13.3.linux-amd64.tar.gz && \
-    mv go /usr/local 
+    mv go /usr/local
 ENV GOROOT /usr/local/go
 ENV GOPATH /root/go
 ENV PATH ${GOPATH}/bin:${GOROOT}/bin:${PATH}
 
 
-# ffuf 
+# ffuf
 RUN go get github.com/ffuf/ffuf
 
 
-# zsh 
+# zsh
 RUN wget https://raw.githubusercontent.com/TeamShadowDC/PcConfig/master/LABS/docker/config/zsh/.oh-my-zsh/themes/oxide.zsh-theme && \
     mv oxide.zsh-theme .zshrc && \
     chsh -s /bin/zsh && \
@@ -126,11 +127,11 @@ RUN cd ${HOME}/wordlists && \
 #Nvim like vscode
 
 
-#Tmux 
+#Tmux
 
 # Add alias
 RUN echo -n "\n\n#Alias\n" >> .zshrc && \
     echo 'alias ll="ls -l"' >> .zshrc && \
     echo 'alias la="ls -a"' >> .zshrc && \
     echo 'alias lla="ls -la"' >> .zshrc && \
-    echo 'alias cme="cracmapexe"' >> .zshrc 
+    echo 'alias cme="cracmapexe"' >> .zshrc
